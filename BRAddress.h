@@ -37,11 +37,11 @@ extern "C" {
 #if BITCOIN_TESTNET
 #pragma message "testnet build"
 #endif
-
-// bitcoin address prefixes
-#define BITCOIN_PUBKEY_ADDRESS      3
-#define BITCOIN_SCRIPT_ADDRESS      5
-#define BITCOIN_PUBKEY_ADDRESS_TEST 111
+    
+// pinkcoin address prefixes
+#define BITCOIN_PUBKEY_ADDRESS      3 // was 0, changed to [PINK MOD]  Pubkey hash (P2PKH address)
+#define BITCOIN_SCRIPT_ADDRESS      28 // was 5, changed to [PINK MOD] Script hash (P2SH address)
+#define BITCOIN_PUBKEY_ADDRESS_TEST 55 //  Testnet pubkey hash
 #define BITCOIN_SCRIPT_ADDRESS_TEST 196
 
 // bitcoin script opcodes: https://en.bitcoin.it/wiki/Script#Constants

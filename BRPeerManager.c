@@ -101,8 +101,8 @@ static const struct { uint32_t height; const char *hash; uint32_t timestamp; uin
 };
 
 static const char *dns_seeds[] = {
-    "seed.breadwallet.com.", "seed.bitcoin.sipa.be.", "dnsseed.bluematt.me.", "dnsseed.bitcoin.dashjr.org.",
-    "seed.bitcoinstats.com.", "bitseed.xf2.org.", "seed.bitcoin.jonasschnelli.ch."
+    "pinkarmy.ml", "frankfurt.pinkarmy.ml", "paris.pinkarmy.ml", "singapore.pinkarmy.ml",
+    "tokyo.pinkarmy.ml"
 };
 
 #endif

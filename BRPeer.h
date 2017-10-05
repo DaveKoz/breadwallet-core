@@ -42,7 +42,7 @@
 #define _peer_log(...) NSLog(__VA_ARGS__)
 #elif defined(__ANDROID__)
 #include <android/log.h>
-#define _peer_log(...) __android_log_print(ANDROID_LOG_INFO, "bread", __VA_ARGS__)
+#define _peer_log(...) __android_log_print(ANDROID_LOG_INFO, "pink", __VA_ARGS__)
 #else
 #include <stdio.h>
 #define _peer_log(...) printf(__VA_ARGS__)
@@ -62,8 +62,8 @@ extern "C" {
 #define SERVICES_NODE_BLOOM   0x04 // BIP111: https://github.com/bitcoin/bips/blob/master/bip-0111.mediawiki
 #define SERVICES_NODE_BCASH   0x20 // https://github.com/Bitcoin-UAHF/spec/blob/master/uahf-technical-spec.md
     
-#define BR_VERSION "0.6.2"
-#define USER_AGENT "/breadwallet:" BR_VERSION "/"
+#define BR_VERSION "0.7.0"
+#define USER_AGENT "/pinkcoin:" BR_VERSION "/"
 
 // explanation of message types at: https://en.bitcoin.it/wiki/Protocol_specification
 #define MSG_VERSION     "version"

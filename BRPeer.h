@@ -52,15 +52,16 @@
 extern "C" {
 #endif
 
+// [PINK MOD] 18333 : 8333 is Bitcoin || 19134 : 9134 is Pink
 #if BITCOIN_TESTNET
-#define STANDARD_PORT 18333
+#define STANDARD_PORT 19134
 #else
-#define STANDARD_PORT 8333
+#define STANDARD_PORT 9134
 #endif
 
 #define SERVICES_NODE_NETWORK 0x01 // services value indicating a node carries full blocks, not just headers
 #define SERVICES_NODE_BLOOM   0x04 // BIP111: https://github.com/bitcoin/bips/blob/master/bip-0111.mediawiki
-#define SERVICES_NODE_BCASH   0x20 // https://github.com/Bitcoin-UAHF/spec/blob/master/uahf-technical-spec.md
+//#define SERVICES_NODE_BCASH   0x20 // https://github.com/Bitcoin-UAHF/spec/blob/master/uahf-technical-spec.md
     
 #define BR_VERSION "0.7.0"
 #define USER_AGENT "/pinkcoin:" BR_VERSION "/"

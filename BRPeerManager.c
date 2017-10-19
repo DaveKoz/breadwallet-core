@@ -49,6 +49,7 @@
 
 #if BITCOIN_TESTNET
 
+// JCV this is the part I need to figure out
 static const struct { uint32_t height; const char *hash; uint32_t timestamp; uint32_t target; } checkpoint_array[] = {
     {       0, "000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943", 1296688602, 0x1d00ffff },
     {  100800, "0000000000a33112f86f3f7b0aa590cb4949b84c2d9c673e9e303257b3be9000", 1376543922, 0x1c00d907 },
@@ -784,10 +785,12 @@ static void _peerConnected(void *info)
         peer_log(peer, "node isn't synced");
         BRPeerDisconnect(peer);
     }
+    /* [PINK] no need to check for bcash
     else if ((peer->services & SERVICES_NODE_BCASH) == SERVICES_NODE_BCASH) {
         peer_log(peer, "b-cash nodes not supported");
         BRPeerDisconnect(peer);
     }
+     */
     else if (BRPeerVersion(peer) >= 70011 && ! (peer->services & SERVICES_NODE_BLOOM)) {
         peer_log(peer, "node doesn't support SPV mode");
         BRPeerDisconnect(peer);

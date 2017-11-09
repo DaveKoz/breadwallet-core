@@ -781,10 +781,14 @@ static void _peerConnected(void *info)
         peer_log(peer, "node doesn't carry full blocks");
         BRPeerDisconnect(peer);
     }
+    
+    //[Pink block chain info needed here]
     else if (BRPeerLastBlock(peer) + 10 < manager->lastBlock->height) {
         peer_log(peer, "node isn't synced");
         BRPeerDisconnect(peer);
+     
     }
+    
     /* [PINK] no need to check for bcash
     else if ((peer->services & SERVICES_NODE_BCASH) == SERVICES_NODE_BCASH) {
         peer_log(peer, "b-cash nodes not supported");

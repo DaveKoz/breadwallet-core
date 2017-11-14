@@ -49,11 +49,9 @@
 
 #if BITCOIN_TESTNET
 
-// JCV this is the part I need to figure out
+// TODO(jcv) this needs proper testnet values.
 static const struct { uint32_t height; const char *hash; uint32_t timestamp; uint32_t target; } checkpoint_array[] = {
-    {       0, "000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943", 1296688602, 0x1d00ffff },
-    {  100800, "0000000000a33112f86f3f7b0aa590cb4949b84c2d9c673e9e303257b3be9000", 1376543922, 0x1c00d907 },
-     { 1108800, "00000000000288d9a219419d0607fb67cc324d4b6d2945ca81eaa5e739fab81e", 1490751239, 0x1b09ecf0 }
+    {       0, "000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943", 1296688602, 0x1d00ffff }
 };
 
 static const char *dns_seeds[] = {
@@ -65,9 +63,7 @@ static const char *dns_seeds[] = {
 // blockchain checkpoints - these are also used as starting points for partial chain downloads, so they need to be at
 // difficulty transition boundaries in order to verify the block difficulty at the immediately following transition
 static const struct { uint32_t height; const char *hash; uint32_t timestamp; uint32_t target; } checkpoint_array[] = {
-    {      0, "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f", 1231006505, 0x1d00ffff },
-    {  20160, "000000000f1aef56190aee63d33a373e6487132d522ff4cd98ccfc96566d461e", 1248481816, 0x1d00ffff },
-    { 463680, "000000000000000000431a2f4619afe62357cd16589b638bb638f2992058d88e", 1493259601, 0x18021b3e }
+    {      0, "00000f79b700e6444665c4d090c9b8833664c4e2597c7087a6ba6391b956cc89", 1486329989, 0x1e0fffff }
 };
 
 static const char *dns_seeds[] = {

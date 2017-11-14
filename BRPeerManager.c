@@ -51,7 +51,7 @@
 
 // TODO(jcv) this needs proper testnet values.
 static const struct { uint32_t height; const char *hash; uint32_t timestamp; uint32_t target; } checkpoint_array[] = {
-    {       0, "000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943", 1296688602, 0x1d00ffff }
+    {       0, "000076a007b949e5f8cdee6c18817d26bc224bfde575ce3f2ecb0dd000f7ec19", 1486329989, 0x1f00ffff }
 };
 
 static const char *dns_seeds[] = {

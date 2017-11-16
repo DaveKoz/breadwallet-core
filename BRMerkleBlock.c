@@ -31,6 +31,7 @@
 #include <string.h>
 #include <assert.h>
 
+//[PINK Values Needed]
 #define MAX_PROOF_OF_WORK 0x1d00ffff    // highest value for difficulty target (higher values are less difficult)
 #define TARGET_TIMESPAN   (14*24*60*60) // the targeted timespan between difficulty target adjustments
 
@@ -256,7 +257,7 @@ static UInt256 _BRMerkleBlockRootR(const BRMerkleBlock *block, size_t *hashIdx, 
 int BRMerkleBlockIsValid(const BRMerkleBlock *block, uint32_t currentTime)
 {
     assert(block != NULL);
-    
+    //[PINK this is the part thats Jacked values need to be verified]
     // target is in "compact" format, where the most significant byte is the size of resulting value in bytes, the next
     // bit is the sign, and the remaining 23bits is the value after having been right shifted by (size - 3)*8 bits
     static const uint32_t maxsize = MAX_PROOF_OF_WORK >> 24, maxtarget = MAX_PROOF_OF_WORK & 0x00ffffff;

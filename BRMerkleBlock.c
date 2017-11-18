@@ -34,7 +34,8 @@
 //[PINK Values Needed]
 #define MAX_PROOF_OF_WORK 0x1d00ffff    // highest value for difficulty target (higher values are less difficult)
 #define TARGET_TIMESPAN   (14*24*60*60) // the targeted timespan between difficulty target adjustments
-
+//#define MAX_PROOF_OF_WORK 0x1e0fffff    // highest value for difficulty target (higher values are less difficult)
+//#define TARGET_TIMESPAN   302400        // = 3.5*24*60*60; the targeted timespan between difficulty target adjustments
 inline static int _ceil_log2(int x)
 {
     int r = (x & (x - 1)) ? 1 : 0;
@@ -261,28 +262,43 @@ int BRMerkleBlockIsValid(const BRMerkleBlock *block, uint32_t currentTime)
     // target is in "compact" format, where the most significant byte is the size of resulting value in bytes, the next
     // bit is the sign, and the remaining 23bits is the value after having been right shifted by (size - 3)*8 bits
     static const uint32_t maxsize = MAX_PROOF_OF_WORK >> 24, maxtarget = MAX_PROOF_OF_WORK & 0x00ffffff;
+    
+    printf("Begin Pinkcoin BRMerkleBlockIsValid Debug Sequence..... \n");
+    printf("maxsize: %d \n", maxsize);
+    printf("maxtarget: %d \n", maxtarget);
+    
     const uint32_t size = block->target >> 24, target = block->target & 0x00ffffff;
     size_t hashIdx = 0, flagIdx = 0;
     UInt256 merkleRoot = _BRMerkleBlockRootR(block, &hashIdx, &flagIdx, 0), t = UINT256_ZERO;
     int r = 1;
+    printf("size: %d \n", size);
+    printf("target: %d \n", target);
+    printf("hashIdx: %zu \n", hashIdx);
+    printf("flagIdx: %zu \n", flagIdx);
     
+   
     // check if merkle root is correct
     if (block->totalTx > 0 && ! UInt256Eq(merkleRoot, block->merkleRoot)) r = 0;
+    printf("Result false = 0: True = 1 True is a good header: %d \n", r);
     
     // check if timestamp is too far in future
     if (block->timestamp > currentTime + BLOCK_MAX_TIME_DRIFT) r = 0;
+     printf("merkle root false = 0: True = 1 True is a good header: %d \n", r);
     
     // check if proof-of-work target is out of range
     if (target == 0 || target & 0x00800000 || size > maxsize || (size == maxsize && target > maxtarget)) r = 0;
+    printf("proof-of-work target false = 0: True = 1 True is a good header: %d \n", r);
     
     if (size > 3) UInt32SetLE(&t.u8[size - 3], target);
     else UInt32SetLE(t.u8, target >> (3 - size)*8);
     
     for (int i = sizeof(t) - 1; r && i >= 0; i--) { // check proof-of-work
         if (block->blockHash.u8[i] < t.u8[i]) break;
+        printf("block->blockHash.u8[i]: if (%d  >  %d) t.u8[i] this is not vaild \n", block->blockHash.u8[i],t.u8[i]);
         if (block->blockHash.u8[i] > t.u8[i]) r = 0;
     }
     
+    printf("Final Value false = 0: True = 1 True is a good header: %d \n", r);
     return r;
 }
 

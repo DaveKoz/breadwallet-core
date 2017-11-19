@@ -39,6 +39,7 @@ extern "C" {
 
 typedef struct {
     UInt256 blockHash;
+    UInt256 powHash; // Extend for Scrypt  PINK Coin Mod
     uint32_t version;
     UInt256 prevBlock;
     UInt256 merkleRoot;

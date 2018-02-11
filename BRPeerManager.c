@@ -1342,12 +1342,14 @@ static void _peerRelayedBlock(void *info, BRMerkleBlock *block)
         BRSetAdd(manager->orphans, block); // mark as orphan til we're caught up
         manager->lastOrphan = block;
     }
+   
     else if (block->height <= checkpoint_array[CHECKPOINT_COUNT - 1].height) { // fork is older than last checkpoint
         peer_log(peer, "ignoring block on fork older than most recent checkpoint, block #%"PRIu32", hash: %s",
                  block->height, u256_hex_encode(block->blockHash));
         BRMerkleBlockFree(block);
         block = NULL;
     }
+    
     else { // new block is on a fork
         peer_log(peer, "chain fork reached height %"PRIu32, block->height);
         BRSetAdd(manager->blocks, block);
@@ -1578,6 +1580,7 @@ BRPeerManager *BRPeerManagerNew(BRWallet *wallet, uint32_t earliestKeyTime, BRMe
     manager->orphans = BRSetNew(_BRPrevBlockHash, _BRPrevBlockEq, blocksCount); // orphans are indexed by prevBlock
     manager->checkpoints = BRSetNew(_BRBlockHeightHash, _BRBlockHeightEq, 100); // checkpoints are indexed by height
 
+ 
     for (size_t i = 0; i < CHECKPOINT_COUNT; i++) {
         block = BRMerkleBlockNew();
         block->height = checkpoint_array[i].height;
@@ -1588,6 +1591,7 @@ BRPeerManager *BRPeerManagerNew(BRWallet *wallet, uint32_t earliestKeyTime, BRMe
         BRSetAdd(manager->blocks, block);
         if (i == 0 || block->timestamp + 7*24*60*60 < manager->earliestKeyTime) manager->lastBlock = block;
     }
+   
 
     block = NULL;
     
@@ -1792,6 +1796,7 @@ void BRPeerManagerRescan(BRPeerManager *manager)
                 break;
             }
         }
+        
         
         if (manager->downloadPeer) { // disconnect the current download peer so a new random one will be selected
             for (size_t i = array_count(manager->peers); i > 0; i--) {

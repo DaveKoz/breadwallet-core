@@ -483,9 +483,39 @@ static int _BRPeerAcceptHeadersMessage(BRPeer *peer, const uint8_t *msg, size_t 
 
             for (size_t i = 0; r && i < count; i++) {
                 BRMerkleBlock *block = BRMerkleBlockParse(&msg[off + 81*i], 81);
+                /* Debug refrence info Code
+                typedef struct {
+                    UInt256 blockHash;
+                    uint32_t version;
+                    UInt256 prevBlock;
+                    UInt256 merkleRoot;
+                    uint32_t timestamp; // time interval since unix epoch
+                    uint32_t target;
+                    uint32_t nonce;
+                    uint32_t totalTx;
+                    UInt256 *hashes;
+                    size_t hashesCount;
+                    uint8_t *flags;
+                    size_t flagsLen;
+                    uint32_t height;
+                } BRMerkleBlock;
+                 */
+
                 
                 if (! BRMerkleBlockIsValid(block, (uint32_t)now)) {
                     peer_log(peer, "invalid block header: %s", u256_hex_encode(block->blockHash));
+                    
+                    peer_log(peer, "Begin Pinkcoin Debug Sequence.....");
+                    peer_log(peer, "block Version: %i", (block->version));
+                    peer_log(peer, "prevBlock: %s", u256_hex_encode(block->prevBlock));
+                    peer_log(peer, "merkleRoot: %s", u256_hex_encode(block->merkleRoot));
+                    peer_log(peer, "timestamp: %i", (block->timestamp));
+                    peer_log(peer, "target: %i", (block->target));
+                    peer_log(peer, "nonce: %i", (block->nonce));
+                    peer_log(peer, "totalTx: %i", (block->totalTx));
+                    
+                    peer_log(peer, "height: %i", (block->height));
+                   
                     BRMerkleBlockFree(block);
                     r = 0;
                 }
